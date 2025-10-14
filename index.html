@@ -56,47 +56,28 @@ input[type=search]{width:100%;max-width:380px;background:var(--chip);border:1px 
 </div>
 
 <script>
-/* عدّل أسماء المدرّبين لاحقًا إن حاب، الآن أسماء افتراضية */
-const trainers = Array.from({length:24}, (_,i)=>({ name:`مدرّب صفحة ${i+1}`, url:`page-${String(i+1).padStart(2,'0')}.pdf` }));
-
-const listEl = document.getElementById('list');
-const searchEl = document.getElementById('search');
-const pdfObj = document.getElementById('pdfObj');
-const openNew = document.getElementById('openNew');
-const viewerTitle = document.getElementById('viewerTitle');
-const hint = document.getElementById('hint');
-
-function render(list){
-  listEl.innerHTML='';
-  list.forEach(it=>{
-    const el = document.createElement('div');
-    el.className='trainer';
-    el.innerHTML = `<div style="display:flex;align-items:center;gap:8px"><span class="dot"></span><div style="font-weight:700">${it.name}</div></div><div style="opacity:.6">›</div>`;
-    el.onclick = ()=> select(it);
-    listEl.appendChild(el);
-  });
-}
-function select(it){
-  viewerTitle.textContent = '📄 ' + it.name;
-  pdfObj.data = it.url;
-  openNew.href = it.url;
-  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-    hint.style.display='block';
-    window.open(it.url,'_blank');
-  } else {
-    hint.style.display='none';
-  }
-}
-function filter(q){
-  q=(q||'').trim();
-  if(!q) return trainers;
-  try{
-    const rx = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
-    return trainers.filter(t=> rx.test(t.name));
-  }catch(_){ return trainers; }
-}
-searchEl.oninput = ()=> render(filter(searchEl.value));
-render(trainers);
-</script>
-</body>
-</html>
+const trainers = [
+  { name: "يوسف صالح محمد العليان", url: "page-01.pdf" },
+  { name: "عبدالسلام عبدالله محمد العليان", url: "page-02.pdf" },
+  { name: "علي صالح عبدالله العودة", url: "page-03.pdf" },
+  { name: "فهد عبدالله محمد المطوع", url: "page-04.pdf" },
+  { name: "علي عبدالله صالح اليحيى", url: "page-05.pdf" },
+  { name: "ضيف الله داخل هملان المطيري", url: "page-06.pdf" },
+  { name: "تركي ضبعان عبيد الحربي", url: "page-07.pdf" },
+  { name: "منصور محمد صالح القريعان", url: "page-08.pdf" },
+  { name: "منصور عبدالرحمن مرزوق الغيداني الحربي", url: "page-09.pdf" },
+  { name: "فهد محمد ابراهيم الراشد الحميد", url: "page-10.pdf" },
+  { name: "منصور مغيران مساعد الحربي", url: "page-11.pdf" },
+  { name: "نايف ابراهيم محمد المعارك", url: "page-12.pdf" },
+  { name: "طارق عبيد براهيم الفريدي الحربي", url: "page-13.pdf" },
+  { name: "عبدالله محمد عبدالله القباع", url: "page-14.pdf" },
+  { name: "ثامر جزاء طلحب العوفي الحربي", url: "page-15.pdf" },
+  { name: "بدر شامخ فلاح المهيمزي الرشيدي", url: "page-16.pdf" },
+  { name: "عبدالرحمن صالح محمد العمير", url: "page-17.pdf" },
+  { name: "معاذ فهد عبدالله السلمي", url: "page-18.pdf" },
+  { name: "ناصر عبدالرحمن ابراهيم الصعنوني", url: "page-19.pdf" },
+  { name: "سلطان فهد ماطر العتيبي", url: "page-20.pdf" },
+  { name: "سلطان فهد ماطر العتيبي", url: "page-21.pdf" },
+  { name: "عبدالكريم محمد السيف", url: "page-22.pdf" },
+  { name: "سلطان عبدالعزيز الزويد", url: "page-23.pdf" },
+  { name: "عبدالرحيم
