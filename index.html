@@ -3,14 +3,16 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>جداول مدربي قسم الدراسات — نسخة الطلاب</title>
+<title>جداول مدربي قسم الدراسات العامة</title>
 <style>
 :root{--brand:#0A4D68;--brand-700:#083d53;--bg:#0b1222;--panel:#0f172a;--text:#fff;--muted:#cbd5e1;--chip:#0e2230;--border:#12394a}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,var(--bg),#09121d);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans";color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
 .container{width:min(1100px,100%);background:rgba(15,23,42,.75);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
 header{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px}
-.brand{display:flex;align-items:center;gap:10px}.logo{width:42px;height:42px;border-radius:10px;background:radial-gradient(circle at 30% 30%, #20b2aa 0%, var(--brand) 50%, var(--brand-700) 100%);box-shadow:0 0 0 3px rgba(32,178,170,.2)}
-.brand h1{margin:0;font-size:clamp(18px,3.5vw,26px)}
+.brand{display:flex;align-items:center;gap:15px}
+.brand img{width:80px;height:auto;border-radius:12px;box-shadow:0 0 6px rgba(0,0,0,.3)}
+.brand h1{margin:0;font-size:clamp(20px,3.5vw,26px);color:#e2f3ff}
+.subtext{color:#a7f3d0;padding:6px 10px;font-size:15px;font-weight:600}
 input[type=search]{width:100%;max-width:380px;background:var(--chip);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:12px;outline:none}
 .layout{display:grid;grid-template-columns:360px 1fr;gap:14px}
 @media (max-width:980px){.layout{grid-template-columns:1fr}}
@@ -29,10 +31,10 @@ input[type=search]{width:100%;max-width:380px;background:var(--chip);border:1px 
 <div class="container">
   <header>
     <div class="brand">
-      <div class="logo"></div>
+      <img src="photo_٢٠٢٥-١٠-١٣_١٨-٣٢-١٤.jpg" alt="شعار الكلية التقنية لعلوم البيئة ببريدة">
       <div>
-        <h1>جداول مدربي قسم الدراسات — نسخة الطلاب</h1>
-        <div style="background:rgba(10,77,104,.25);border:1px solid rgba(10,77,104,.5);color:#a7f3d0;padding:4px 8px;border-radius:999px;font-size:12px;width:max-content">ألوان الكلية</div>
+        <h1>جداول مدربي قسم الدراسات العامة</h1>
+        <div class="subtext">الكلية التقنية لعلوم البيئة ببريدة</div>
       </div>
     </div>
     <input id="search" type="search" placeholder="ابحث باسم المدرّب…" />
