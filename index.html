@@ -80,4 +80,47 @@ const trainers = [
   { name: "سلطان فهد ماطر العتيبي", url: "page-21.pdf" },
   { name: "عبدالكريم محمد السيف", url: "page-22.pdf" },
   { name: "سلطان عبدالعزيز الزويد", url: "page-23.pdf" },
-  { name: "عبدالرحيم
+  { name: "عبدالرحيم منصور عبدالعزيز الببقمي", url: "page-24.pdf" }
+];
+
+const listEl = document.getElementById('list');
+const searchEl = document.getElementById('search');
+const pdfObj = document.getElementById('pdfObj');
+const openNew = document.getElementById('openNew');
+const viewerTitle = document.getElementById('viewerTitle');
+const hint = document.getElementById('hint');
+
+function render(list){
+  listEl.innerHTML='';
+  list.forEach(it=>{
+    const el = document.createElement('div');
+    el.className='trainer';
+    el.innerHTML = `<div style="display:flex;align-items:center;gap:8px"><span class="dot"></span><div style="font-weight:700">${it.name}</div></div><div style="opacity:.6">›</div>`;
+    el.onclick = ()=> select(it);
+    listEl.appendChild(el);
+  });
+}
+function select(it){
+  viewerTitle.textContent = '📄 ' + it.name;
+  pdfObj.data = it.url;
+  openNew.href = it.url;
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    hint.style.display='block';
+    window.open(it.url,'_blank');
+  } else {
+    hint.style.display='none';
+  }
+}
+function filter(q){
+  q=(q||'').trim();
+  if(!q) return trainers;
+  try{
+    const rx = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
+    return trainers.filter(t=> rx.test(t.name));
+  }catch(_){ return trainers; }
+}
+searchEl.oninput = ()=> render(filter(searchEl.value));
+render(trainers);
+</script>
+</body>
+</html>
