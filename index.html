@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>جداول مدربي قسم الدراسات — نسخة الطلاب</title>
+<style>
+:root{--brand:#0A4D68;--brand-700:#083d53;--bg:#0b1222;--panel:#0f172a;--text:#fff;--muted:#cbd5e1;--chip:#0e2230;--border:#12394a}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,var(--bg),#09121d);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans";color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.container{width:min(1100px,100%);background:rgba(15,23,42,.75);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+header{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:42px;height:42px;border-radius:10px;background:radial-gradient(circle at 30% 30%, #20b2aa 0%, var(--brand) 50%, var(--brand-700) 100%);box-shadow:0 0 0 3px rgba(32,178,170,.2)}
+.brand h1{margin:0;font-size:clamp(18px,3.5vw,26px)}
+input[type=search]{width:100%;max-width:380px;background:var(--chip);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:12px;outline:none}
+.layout{display:grid;grid-template-columns:360px 1fr;gap:14px}
+@media (max-width:980px){.layout{grid-template-columns:1fr}}
+.panel{background:rgba(2,6,23,.35);border:1px solid var(--border);border-radius:16px;padding:12px;min-height:200px}
+.panel h2{margin:0 0 10px 0;font-size:18px;color:#e2f3ff}
+.list{display:flex;flex-direction:column;gap:8px;max-height:65vh;overflow:auto;padding-right:4px}
+.trainer{background:linear-gradient(180deg,#0b1723,#0f2433);border:1px solid var(--border);padding:10px 12px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;transition:.15s}
+.trainer:hover{transform:translateY(-1px);border-color:#1e293b;box-shadow:0 0 0 2px rgba(10,77,104,.2)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--brand);margin-left:8px}
+.viewer{height:70vh;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#0b1222;display:flex;flex-direction:column}
+.btn{background:var(--brand);border:1px solid var(--brand-700);color:#eaffff;padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:700;text-decoration:none;display:inline-block;margin:8px 0}
+.msg{color:#fbbf24;margin-top:6px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="brand">
+      <div class="logo"></div>
+      <div>
+        <h1>جداول مدربي قسم الدراسات — نسخة الطلاب</h1>
+        <div style="background:rgba(10,77,104,.25);border:1px solid rgba(10,77,104,.5);color:#a7f3d0;padding:4px 8px;border-radius:999px;font-size:12px;width:max-content">ألوان الكلية</div>
+      </div>
+    </div>
+    <input id="search" type="search" placeholder="ابحث باسم المدرّب…" />
+  </header>
+
+  <div class="layout">
+    <section class="panel">
+      <h2>قائمة المدرّبين</h2>
+      <div id="list" class="list"></div>
+    </section>
+
+    <section class="panel">
+      <h2 id="viewerTitle">اختر اسم المدرّب</h2>
+      <a id="openNew" class="btn" target="_blank" rel="noopener">فتح الملف مباشرة ↗</a>
+      <div class="viewer">
+        <object id="pdfObj" data="" type="application/pdf" style="flex:1;border:0"></object>
+      </div>
+      <div id="hint" class="msg" style="display:none">لو لم يظهر هنا، اضغط "فتح الملف مباشرة". بعض المتصفحات (خصوصًا iPhone) تمنع عرض PDF داخل الصفحة.</div>
+    </section>
+  </div>
+</div>
+
+<script>
+/* عدّل أسماء المدرّبين لاحقًا إن حاب، الآن أسماء افتراضية */
+const trainers = Array.from({length:24}, (_,i)=>({ name:`مدرّب صفحة ${i+1}`, url:`page-${String(i+1).padStart(2,'0')}.pdf` }));
+
+const listEl = document.getElementById('list');
+const searchEl = document.getElementById('search');
+const pdfObj = document.getElementById('pdfObj');
+const openNew = document.getElementById('openNew');
+const viewerTitle = document.getElementById('viewerTitle');
+const hint = document.getElementById('hint');
+
+function render(list){
+  listEl.innerHTML='';
+  list.forEach(it=>{
+    const el = document.createElement('div');
+    el.className='trainer';
+    el.innerHTML = `<div style="display:flex;align-items:center;gap:8px"><span class="dot"></span><div style="font-weight:700">${it.name}</div></div><div style="opacity:.6">›</div>`;
+    el.onclick = ()=> select(it);
+    listEl.appendChild(el);
+  });
+}
+function select(it){
+  viewerTitle.textContent = '📄 ' + it.name;
+  pdfObj.data = it.url;
+  openNew.href = it.url;
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    hint.style.display='block';
+    window.open(it.url,'_blank');
+  } else {
+    hint.style.display='none';
+  }
+}
+function filter(q){
+  q=(q||'').trim();
+  if(!q) return trainers;
+  try{
+    const rx = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
+    return trainers.filter(t=> rx.test(t.name));
+  }catch(_){ return trainers; }
+}
+searchEl.oninput = ()=> render(filter(searchEl.value));
+render(trainers);
+</script>
+</body>
+</html>
