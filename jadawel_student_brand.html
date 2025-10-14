@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>جداول — نسخة الطلاب (ألوان الكلية)</title>
+<style>:root{--brand:#0A4D68;--brand-700:#083d53;--bg:#0b1222;--panel:#0f172a;--text:#fff;--muted:#cbd5e1;--chip:#0e2230;--border:#12394a}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,var(--bg),#09121d);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans";color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.container{width:min(1100px,100%);background:rgba(15,23,42,0.75);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+header{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:10px}.brand .logo{width:42px;height:42px;border-radius:10px;background:radial-gradient(circle at 30% 30%, #20b2aa 0%, var(--brand) 50%, var(--brand-700) 100%);box-shadow:0 0 0 3px rgba(32,178,170,.2)}.brand h1{margin:0;font-size:clamp(18px,3.5vw,26px)}
+.search{display:flex;gap:10px;align-items:center}input[type=search]{width:100%;max-width:380px;background:var(--chip);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:12px;outline:none}
+.layout{display:grid;grid-template-columns:360px 1fr;gap:14px}@media (max-width:980px){.layout{grid-template-columns:1fr}}
+.panel{background:rgba(2,6,23,0.35);border:1px solid var(--border);border-radius:16px;padding:12px;min-height:200px}.panel h2{margin:0 0 10px 0;font-size:18px;color:#e2f3ff}
+.list{display:flex;flex-direction:column;gap:8px;max-height:65vh;overflow:auto;padding-right:4px}
+.trainer{background:linear-gradient(180deg,#0b1723,#0f2433);border:1px solid var(--border);padding:10px 12px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;transition:.15s}
+.trainer:hover{transform:translateY(-1px);border-color:#1e293b;box-shadow:0 0 0 2px rgba(10,77,104,.2)}.trainer .dot{width:8px;height:8px;border-radius:50%;background:var(--brand);margin-left:8px}
+.viewer{height:70vh;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#0b1222;display:flex;flex-direction:column}
+.tools{display:flex;gap:8px;margin:8px 0}.btn{background:var(--brand);border:1px solid var(--brand-700);color:#eaffff;padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:700;text-decoration:none;display:inline-block}
+.btn.secondary{background:transparent;border-color:var(--border);color:#c8e7ff}.msg{color:#fbbf24;margin-top:6px;font-size:13px}.footer{color:#94a3b8;margin-top:6px}.hidden{display:none}.badge{background:rgba(10,77,104,.25);border:1px solid rgba(10,77,104,.5);color:#a7f3d0;padding:4px 8px;border-radius:999px;font-size:12px}</style>
+</head><body>
+<div class="container">
+<header><div class="brand"><div class="logo"></div><div><h1>جداول مدربي قسم الدراسات — نسخة الطلاب</h1><div class="badge">ألوان الكلية</div></div></div><div class="search"><input id="search" type="search" placeholder="ابحث باسم المدرّب…"/></div></header>
+<div class="layout"><section class="panel"><h2>قائمة المدرّبين</h2><div id="list" class="list"></div></section>
+<section class="panel"><h2 id="viewerTitle">اختر اسم المدرّب</h2><div class="tools hidden" id="tools"><a id="openNew" class="btn" target="_blank" rel="noopener">فتح الملف مباشرة ↗</a><button id="copyLink" class="btn secondary">نسخ رابط المدرّب</button></div>
+<div class="viewer"><object id="pdfObj" data="" type="application/pdf" style="flex:1;border:0"></object></div>
+<div id="hint" class="msg hidden">إذا لم يظهر الجدول هنا، اضغط "فتح الملف مباشرة". بعض المتصفحات (خصوصًا iPhone) لا تعرض PDF داخل الصفحة.</div>
+<div class="footer">ارفع هذه الصفحة مع مجلد <code>pages_brand</code> في نفس المسار.</div>
+</section></div></div>
+<script>
+const mapping = [
+  {
+    "name": "مدرّب صفحة 1",
+    "url": "pages_brand/page-01.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 2",
+    "url": "pages_brand/page-02.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 3",
+    "url": "pages_brand/page-03.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 4",
+    "url": "pages_brand/page-04.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 5",
+    "url": "pages_brand/page-05.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 6",
+    "url": "pages_brand/page-06.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 7",
+    "url": "pages_brand/page-07.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 8",
+    "url": "pages_brand/page-08.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 9",
+    "url": "pages_brand/page-09.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 10",
+    "url": "pages_brand/page-10.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 11",
+    "url": "pages_brand/page-11.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 12",
+    "url": "pages_brand/page-12.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 13",
+    "url": "pages_brand/page-13.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 14",
+    "url": "pages_brand/page-14.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 15",
+    "url": "pages_brand/page-15.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 16",
+    "url": "pages_brand/page-16.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 17",
+    "url": "pages_brand/page-17.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 18",
+    "url": "pages_brand/page-18.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 19",
+    "url": "pages_brand/page-19.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 20",
+    "url": "pages_brand/page-20.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 21",
+    "url": "pages_brand/page-21.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 22",
+    "url": "pages_brand/page-22.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 23",
+    "url": "pages_brand/page-23.pdf"
+  },
+  {
+    "name": "مدرّب صفحة 24",
+    "url": "pages_brand/page-24.pdf"
+  }
+];
+const listEl=document.getElementById('list'), searchEl=document.getElementById('search'), viewerTitle=document.getElementById('viewerTitle');
+const openNew=document.getElementById('openNew'), copyLink=document.getElementById('copyLink'), pdfObj=document.getElementById('pdfObj'), tools=document.getElementById('tools'), hint=document.getElementById('hint');
+function isIOS(){return /iPad|iPhone|iPod/.test(navigator.userAgent)&&!window.MSStream}
+function renderList(src){listEl.innerHTML='';src.forEach(it=>{const el=document.createElement('div');el.className='trainer';el.innerHTML='<div style="display:flex;align-items:center;gap:8px"><span class="dot"></span><div style="font-weight:700">'+it.name+'</div></div><div style="opacity:.6">›</div>';el.addEventListener('click',()=>select(it.name,it.url,true));listEl.appendChild(el);});}
+function select(name,url,push){viewerTitle.textContent='📄 '+name;openNew.href=url;tools.classList.remove('hidden');hint.classList.add('hidden');pdfObj.data=url;if(isIOS()){hint.classList.remove('hidden');window.open(url,'_blank');}if(push)location.hash=encodeURIComponent(name);}
+function filter(q){q=(q||'').trim();if(!q)return mapping;try{const rx=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');return mapping.filter(t=>rx.test(t.name));}catch(e){return mapping;}}
+searchEl.addEventListener('input',()=>renderList(filter(searchEl.value)));
+function handleHash(){const h=decodeURIComponent((location.hash||'').replace(/^#/,''));if(!h)return;const found=mapping.find(t=>t.name===h)||mapping.find(t=>t.name.includes(h));if(found)select(found.name,found.url,false);}
+renderList(mapping);handleHash();window.addEventListener('hashchange',handleHash);
+copyLink.addEventListener('click',()=>{const url=new URL(window.location.href);navigator.clipboard.writeText(url.toString()).then(()=>{copyLink.textContent='تم النسخ ✅';setTimeout(()=>copyLink.textContent='نسخ رابط المدرّب',1200);});});
+</script></body></html>
