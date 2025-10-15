@@ -1,36 +1,29 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>جداول مدربي قسم الدراسات العامة</title>
 <style>
-  body{font-family:system-ui,-apple-system,"Segoe UI",Arial; background:#0b1222; color:#fff; margin:0; padding:16px}
-  .wrap{max-width:1100px; margin:0 auto}
-  header{display:flex;justify-content:space-between;align-items:center;gap:12px; border-bottom:1px solid #12394a; padding-bottom:8px; margin-bottom:12px}
-  h1{margin:0; font-size:22px}
-  .sub{color:#a7f3d0; font-weight:600}
-  input[type=search]{width:100%; max-width:380px; padding:10px 12px; border-radius:10px; border:1px solid #12394a; background:#0e2230; color:#fff; outline:none}
-  .grid{display:grid; grid-template-columns:320px 1fr; gap:12px}
-  @media (max-width:920px){.grid{grid-template-columns:1fr}}
-  .panel{border:1px solid #12394a; border-radius:12px; padding:10px; background:#0f172a}
-  .panel h2{margin:0 0 8px 0; font-size:16px}
-  .list{display:flex; flex-direction:column; gap:8px; max-height:65vh; overflow:auto}
-  .item{background:#102536; border:1px solid #12394a; border-radius:10px; padding:10px; cursor:pointer; display:flex; justify-content:space-between; align-items:center}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Arial;background:#0b1222;color:#fff;margin:0;padding:16px}
+  .wrap{max-width:1100px;margin:0 auto}
+  header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #12394a;padding-bottom:8px;margin-bottom:12px}
+  h1{margin:0;font-size:22px}.sub{color:#a7f3d0;font-weight:600}
+  input[type=search]{width:100%;max-width:380px;padding:10px 12px;border-radius:10px;border:1px solid #12394a;background:#0e2230;color:#fff;outline:none}
+  .grid{display:grid;grid-template-columns:320px 1fr;gap:12px}@media (max-width:920px){.grid{grid-template-columns:1fr}}
+  .panel{border:1px solid #12394a;border-radius:12px;padding:10px;background:#0f172a}
+  .panel h2{margin:0 0 8px 0;font-size:16px}
+  .list{display:flex;flex-direction:column;gap:8px;max-height:65vh;overflow:auto}
+  .item{background:#102536;border:1px solid #12394a;border-radius:10px;padding:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
   .item:hover{border-color:#1e293b}
-  .viewer{height:70vh; border:1px solid #12394a; border-radius:10px; background:#0b1222; overflow:hidden}
-  .btn{display:inline-block; margin:8px 0; padding:10px 12px; border-radius:10px; background:#0A4D68; color:#eaffff; text-decoration:none; border:1px solid #083d53}
-  .msg{color:#fbbf24; font-size:13px}
-  .diag{margin-top:8px; font-size:12px; color:#ffd5d5}
+  .viewer{height:70vh;border:1px solid #12394a;border-radius:10px;background:#0b1222;overflow:hidden}
+  .btn{display:inline-block;margin:8px 0;padding:10px 12px;border-radius:10px;background:#0A4D68;color:#eaffff;text-decoration:none;border:1px solid #083d53}
+  .msg{color:#fbbf24;font-size:13px}.diag{margin-top:8px;font-size:12px;color:#ffd5d5}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div>
-      <h1>جداول مدربي قسم الدراسات العامة</h1>
-      <div class="sub">الكلية التقنية لعلوم البيئة ببريدة</div>
-    </div>
+    <div><h1>جداول مدربي قسم الدراسات العامة</h1><div class="sub">الكلية التقنية لعلوم البيئة ببريدة</div></div>
     <input id="search" type="search" placeholder="ابحث باسم المدرّب…">
   </header>
 
@@ -44,9 +37,7 @@
     <section class="panel">
       <h2 id="viewerTitle">اختر اسم المدرّب</h2>
       <a id="openNew" class="btn" target="_blank" rel="noopener">فتح الملف مباشرة ↗</a>
-      <div class="viewer">
-        <object id="pdfObj" data="" type="application/pdf" style="width:100%; height:100%; border:0"></object>
-      </div>
+      <div class="viewer"><object id="pdfObj" data="" type="application/pdf" style="width:100%;height:100%;border:0"></object></div>
       <div id="hint" class="msg" style="display:none">لو لم يظهر هنا، اضغط "فتح الملف مباشرة". بعض المتصفحات (خصوصًا iPhone) تمنع عرض PDF داخل الصفحة.</div>
     </section>
   </div>
@@ -54,81 +45,44 @@
 
 <script>
 (function(){
-  const listEl = document.getElementById('list');
-  const searchEl = document.getElementById('search');
-  const pdfObj = document.getElementById('pdfObj');
-  const openNew = document.getElementById('openNew');
-  const viewerTitle = document.getElementById('viewerTitle');
-  const hint = document.getElementById('hint');
-  const diag = document.getElementById('diag');
+  const listEl=document.getElementById('list'),searchEl=document.getElementById('search'),
+        pdfObj=document.getElementById('pdfObj'),openNew=document.getElementById('openNew'),
+        viewerTitle=document.getElementById('viewerTitle'),hint=document.getElementById('hint'),
+        diag=document.getElementById('diag');
 
-  // القائمة كاملة + إضافة حاتم
-  const trainers = [
-    { name: "يوسف صالح محمد العليان", url: "page-01.pdf" },
-    { name: "عبدالسلام عبدالله محمد العليان", url: "page-02.pdf" },
-    { name: "علي صالح عبدالله العودة", url: "page-03.pdf" },
-    { name: "فهد عبدالله محمد المطوع", url: "page-04.pdf" },
-    { name: "علي عبدالله صالح اليحيى", url: "page-05.pdf" },
-    { name: "ضيف الله داخل هملان المطيري", url: "page-06.pdf" },
-    { name: "تركي ضبعان عبيد الحربي", url: "page-07.pdf" },
-    { name: "منصور محمد صالح القريعان", url: "page-08.pdf" },
-    { name: "منصور عبدالرحمن مرزوق الغيداني الحربي", url: "page-09.pdf" },
-    { name: "فهد محمد ابراهيم الراشد الحميد", url: "page-10.pdf" },
-    { name: "منصور مغيران مساعد الحربي", url: "page-11.pdf" },
-    { name: "نايف ابراهيم محمد المعارك", url: "page-12.pdf" },
-    { name: "طارق عبيد براهيم الفريدي الحربي", url: "page-13.pdf" },
-    { name: "عبدالله محمد عبدالله القباع", url: "page-14.pdf" },
-    { name: "ثامر جزاء طلحب العوفي الحربي", url: "page-15.pdf" },
-    { name: "بدر شامخ فلاح المهيمزي الرشيدي", url: "page-16.pdf" },
-    { name: "عبدالرحمن صالح محمد العمير", url: "page-17.pdf" },
-    { name: "معاذ فهد عبدالله السلمي", url: "page-18.pdf" },
-    { name: "ناصر عبدالرحمن ابراهيم الصعنوني", url: "page-19.pdf" },
-    { name: "سلطان فهد ماطر العتيبي", url: "page-20.pdf" },
-    { name: "سلطان فهد ماطر العتيبي", url: "page-21.pdf" },
-    { name: "عبدالكريم محمد السيف", url: "page-22.pdf" },
-    { name: "سلطان عبدالعزيز الزويد", url: "page-23.pdf" },
-    { name: "عبدالرحيم منصور عبدالعزيز الببقمي", url: "page-24.pdf" },
-    { name: "حاتم صالح محمد القاسم", url: "page-25.pdf" }
+  const trainers=[
+    { name:"يوسف صالح محمد العليان", url:"page-01.pdf" },
+    { name:"عبدالسلام عبدالله محمد العليان", url:"page-02.pdf" },
+    { name:"علي صالح عبدالله العودة", url:"page-03.pdf" },
+    { name:"فهد عبدالله محمد المطوع", url:"page-04.pdf" },
+    { name:"علي عبدالله صالح اليحيى", url:"page-05.pdf" },
+    { name:"ضيف الله داخل هملان المطيري", url:"page-06.pdf" },
+    { name:"تركي ضبعان عبيد الحربي", url:"page-07.pdf" },
+    { name:"منصور محمد صالح القريعان", url:"page-08.pdf" },
+    { name:"منصور عبدالرحمن مرزوق الغيداني الحربي", url:"page-09.pdf" },
+    { name:"فهد محمد ابراهيم الراشد الحميد", url:"page-10.pdf" },
+    { name:"منصور مغيران مساعد الحربي", url:"page-11.pdf" },
+    { name:"نايف ابراهيم محمد المعارك", url:"page-12.pdf" },
+    { name:"طارق عبيد براهيم الفريدي الحربي", url:"page-13.pdf" },
+    { name:"عبدالله محمد عبدالله القباع", url:"page-14.pdf" },
+    { name:"ثامر جزاء طلحب العوفي الحربي", url:"page-15.pdf" },
+    { name:"بدر شامخ فلاح المهيمزي الرشيدي", url:"page-16.pdf" },
+    { name:"عبدالرحمن صالح محمد العمير", url:"page-17.pdf" },
+    { name:"معاذ فهد عبدالله السلمي", url:"page-18.pdf" },
+    { name:"ناصر عبدالرحمن ابراهيم الصعنوني", url:"page-19.pdf" },
+    { name:"سلطان فهد ماطر العتيبي", url:"page-20.pdf" },
+    { name:"سلطان فهد ماطر العتيبي", url:"page-21.pdf" },
+    { name:"عبدالكريم محمد السيف", url:"page-22.pdf" },
+    { name:"سلطان عبدالعزيز الزويد", url:"page-23.pdf" },
+    { name:"عبدالرحيم منصور عبدالعزيز الببقمي", url:"page-24.pdf" },
+    { name:"حاتم صالح محمد القاسم", url:"page-25.pdf" }
   ];
 
-  function isIOS(){ return /iPad|iPhone|iPod/.test(navigator.userAgent); }
-
-  function render(list){
-    listEl.innerHTML = '';
-    list.forEach(it=>{
-      const el = document.createElement('div');
-      el.className = 'item';
-      el.innerHTML = '<div>'+it.name+'</div><div>›</div>';
-      el.onclick = ()=> select(it);
-      listEl.appendChild(el);
-    });
-  }
-
-  function select(it){
-    viewerTitle.textContent = '📄 ' + it.name;
-    pdfObj.data = it.url;
-    openNew.href = it.url;
-    hint.style.display = isIOS() ? 'block' : 'none';
-  }
-
-  function filter(q){
-    q = (q||'').trim();
-    if(!q) return trainers;
-    try{
-      const rx = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
-      return trainers.filter(t=> rx.test(t.name));
-    }catch(e){
-      diag.textContent = 'Regex error: '+e.message;
-      return trainers;
-    }
-  }
-
-  try{
-    render(trainers);
-    searchEl.oninput = ()=> render(filter(searchEl.value));
-  }catch(e){
-    diag.textContent = 'Init error: '+e.message;
-  }
+  function isIOS(){return /iPad|iPhone|iPod/.test(navigator.userAgent)}
+  function render(list){listEl.innerHTML='';list.forEach(it=>{const el=document.createElement('div');el.className='item';el.innerHTML='<div>'+it.name+'</div><div>›</div>';el.onclick=()=>select(it);listEl.appendChild(el);});}
+  function select(it){viewerTitle.textContent='📄 '+it.name;pdfObj.data=it.url;openNew.href=it.url;hint.style.display=isIOS()?'block':'none';}
+  function filter(q){q=(q||'').trim();if(!q)return trainers;try{const rx=new RegExp(q.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&'),'i');return trainers.filter(t=>rx.test(t.name));}catch(e){diag.textContent='Regex error: '+e.message;return trainers;}}
+  try{render(trainers);searchEl.oninput=()=>render(filter(searchEl.value));}catch(e){diag.textContent='Init error: '+e.message;}
 })();
 </script>
 </body>
