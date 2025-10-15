@@ -1,5 +1,5 @@
 <script>
-/* حماية من الأخطاء: لو صار خطأ لا تتعطل الصفحة البيضاء */
+/* حماية من الأعطال: لو صار خطأ ما تصير صفحة بيضاء */
 (function(){
   const listEl = document.getElementById('list');
   const searchEl = document.getElementById('search');
@@ -8,7 +8,7 @@
   const viewerTitle = document.getElementById('viewerTitle');
   const hint = document.getElementById('hint');
 
-  /* قائمة الأسماء والروابط — محدثة وبها حاتم */
+  /* قائمة الأسماء — محدثة وبها حاتم */
   const trainers = [
     { name: "يوسف صالح محمد العليان", url: "page-01.pdf" },
     { name: "عبدالسلام عبدالله محمد العليان", url: "page-02.pdf" },
@@ -34,7 +34,6 @@
     { name: "عبدالكريم محمد السيف", url: "page-22.pdf" },
     { name: "سلطان عبدالعزيز الزويد", url: "page-23.pdf" },
     { name: "عبدالرحيم منصور عبدالعزيز الببقمي", url: "page-24.pdf" },
-    /* أضفنا حاتم هنا — الأفضل أن يكون اسم الملف بالإنجليزي البسيط */
     { name: "حاتم صالح محمد القاسم", url: "page-25.pdf" }
   ];
 
