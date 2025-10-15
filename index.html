@@ -1,43 +1,187 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>جداول مدربي قسم الدراسات العامة</title>
 <style>
-  body{font-family:system-ui,-apple-system,"Segoe UI",Arial;background:#0b1222;color:#fff;margin:0;padding:16px}
-  .wrap{max-width:1100px;margin:0 auto}
-  header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #12394a;padding-bottom:8px;margin-bottom:12px}
-  h1{margin:0;font-size:22px}.sub{color:#a7f3d0;font-weight:600}
-  input[type=search]{width:100%;max-width:380px;padding:10px 12px;border-radius:10px;border:1px solid #12394a;background:#0e2230;color:#fff;outline:none}
-  .grid{display:grid;grid-template-columns:320px 1fr;gap:12px}@media (max-width:920px){.grid{grid-template-columns:1fr}}
-  .panel{border:1px solid #12394a;border-radius:12px;padding:10px;background:#0f172a}
-  .panel h2{margin:0 0 8px 0;font-size:16px}
-  .list{display:flex;flex-direction:column;gap:8px;max-height:65vh;overflow:auto}
-  .item{background:#102536;border:1px solid #12394a;border-radius:10px;padding:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-  .item:hover{border-color:#1e293b}
-  .viewer{height:70vh;border:1px solid #12394a;border-radius:10px;background:#0b1222;overflow:hidden}
-  .btn{display:inline-block;margin:8px 0;padding:10px 12px;border-radius:10px;background:#0A4D68;color:#eaffff;text-decoration:none;border:1px solid #083d53}
-  .msg{color:#fbbf24;font-size:13px}.diag{margin-top:8px;font-size:12px;color:#ffd5d5}
+:root {
+  --brand:#0A4D68;
+  --brand-700:#083d53;
+  --bg:#0b1222;
+  --panel:#0f172a;
+  --text:#fff;
+  --muted:#cbd5e1;
+  --chip:#0e2230;
+  --border:#12394a;
+}
+*{box-sizing:border-box}
+body {
+  margin:0;
+  background:linear-gradient(180deg,var(--bg),#09121d);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans";
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+.container {
+  width:min(1100px,100%);
+  background:rgba(15,23,42,.75);
+  backdrop-filter:blur(8px);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+header {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  border-bottom:1px solid var(--border);
+  padding-bottom:12px;
+  margin-bottom:14px;
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+.brand img {
+  width:80px;
+  height:auto;
+  border-radius:12px;
+  box-shadow:0 0 6px rgba(0,0,0,.3);
+}
+.brand h1 {
+  margin:0;
+  font-size:clamp(20px,3.5vw,26px);
+  color:#e2f3ff;
+}
+.subtext {
+  color:#a7f3d0;
+  padding:6px 10px;
+  font-size:15px;
+  font-weight:600;
+}
+input[type=search] {
+  width:100%;
+  max-width:380px;
+  background:var(--chip);
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:10px 12px;
+  border-radius:12px;
+  outline:none;
+}
+.layout {
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:14px;
+}
+@media (max-width:980px){.layout{grid-template-columns:1fr}}
+.panel {
+  background:rgba(2,6,23,.35);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:12px;
+  min-height:200px;
+}
+.panel h2 {
+  margin:0 0 10px 0;
+  font-size:18px;
+  color:#e2f3ff;
+}
+.list {
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-height:65vh;
+  overflow:auto;
+  padding-right:4px;
+}
+.trainer {
+  background:linear-gradient(180deg,#0b1723,#0f2433);
+  border:1px solid var(--border);
+  padding:10px 12px;
+  border-radius:12px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  transition:.15s;
+}
+.trainer:hover {
+  transform:translateY(-1px);
+  border-color:#1e293b;
+  box-shadow:0 0 0 2px rgba(10,77,104,.2);
+}
+.dot {
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--brand);
+  margin-left:8px;
+}
+.viewer {
+  height:70vh;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  background:#0b1222;
+  display:flex;
+  flex-direction:column;
+}
+.btn {
+  background:var(--brand);
+  border:1px solid var(--brand-700);
+  color:#eaffff;
+  padding:10px 12px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:700;
+  text-decoration:none;
+  display:inline-block;
+  margin:8px 0;
+}
+.msg {
+  color:#fbbf24;
+  margin-top:6px;
+  font-size:13px;
+}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="container">
   <header>
-    <div><h1>جداول مدربي قسم الدراسات العامة</h1><div class="sub">الكلية التقنية لعلوم البيئة ببريدة</div></div>
+    <div class="brand">
+      <!-- شعار الكلية -->
+      <img src="photo_2025-10-13_18-32-14.jpg" alt="شعار الكلية">
+      <div>
+        <h1>جداول مدربي قسم الدراسات العامة</h1>
+        <div class="subtext">الكلية التقنية لعلوم البيئة ببريدة</div>
+      </div>
+    </div>
     <input id="search" type="search" placeholder="ابحث باسم المدرّب…">
   </header>
 
-  <div class="grid">
+  <div class="layout">
     <section class="panel">
       <h2>قائمة المدرّبين</h2>
       <div id="list" class="list"></div>
-      <div id="diag" class="diag"></div>
     </section>
 
     <section class="panel">
       <h2 id="viewerTitle">اختر اسم المدرّب</h2>
       <a id="openNew" class="btn" target="_blank" rel="noopener">فتح الملف مباشرة ↗</a>
-      <div class="viewer"><object id="pdfObj" data="" type="application/pdf" style="width:100%;height:100%;border:0"></object></div>
+      <div class="viewer">
+        <object id="pdfObj" data="" type="application/pdf" style="flex:1;border:0"></object>
+      </div>
       <div id="hint" class="msg" style="display:none">لو لم يظهر هنا، اضغط "فتح الملف مباشرة". بعض المتصفحات (خصوصًا iPhone) تمنع عرض PDF داخل الصفحة.</div>
     </section>
   </div>
@@ -45,11 +189,14 @@
 
 <script>
 (function(){
-  const listEl=document.getElementById('list'),searchEl=document.getElementById('search'),
-        pdfObj=document.getElementById('pdfObj'),openNew=document.getElementById('openNew'),
-        viewerTitle=document.getElementById('viewerTitle'),hint=document.getElementById('hint'),
-        diag=document.getElementById('diag');
+  const listEl=document.getElementById('list');
+  const searchEl=document.getElementById('search');
+  const pdfObj=document.getElementById('pdfObj');
+  const openNew=document.getElementById('openNew');
+  const viewerTitle=document.getElementById('viewerTitle');
+  const hint=document.getElementById('hint');
 
+  // أسماء المدرّبين (تأكد من روابط ملفاتهم)
   const trainers=[
     { name:"يوسف صالح محمد العليان", url:"page-01.pdf" },
     { name:"عبدالسلام عبدالله محمد العليان", url:"page-02.pdf" },
@@ -71,18 +218,40 @@
     { name:"معاذ فهد عبدالله السلمي", url:"page-18.pdf" },
     { name:"ناصر عبدالرحمن ابراهيم الصعنوني", url:"page-19.pdf" },
     { name:"سلطان فهد ماطر العتيبي", url:"page-20.pdf" },
-    { name:"سلطان فهد ماطر العتيبي", url:"page-21.pdf" },
-    { name:"عبدالكريم محمد السيف", url:"page-22.pdf" },
-    { name:"سلطان عبدالعزيز الزويد", url:"page-23.pdf" },
-    { name:"عبدالرحيم منصور عبدالعزيز الببقمي", url:"page-24.pdf" },
-    { name:"حاتم صالح محمد القاسم", url:"page-25.pdf" }
+    { name:"عبدالكريم محمد عبدالعزيز السيف", url:"page-21.pdf" },
+    { name:"سلطان عبدالعزيز عبدالله الزويد", url:"page-22.pdf" },
+    { name:"عبدالرحيم منصور عبدالعزيز الهقاص البقمي", url:"page-23.pdf" }
   ];
 
-  function isIOS(){return /iPad|iPhone|iPod/.test(navigator.userAgent)}
-  function render(list){listEl.innerHTML='';list.forEach(it=>{const el=document.createElement('div');el.className='item';el.innerHTML='<div>'+it.name+'</div><div>›</div>';el.onclick=()=>select(it);listEl.appendChild(el);});}
-  function select(it){viewerTitle.textContent='📄 '+it.name;pdfObj.data=it.url;openNew.href=it.url;hint.style.display=isIOS()?'block':'none';}
-  function filter(q){q=(q||'').trim();if(!q)return trainers;try{const rx=new RegExp(q.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&'),'i');return trainers.filter(t=>rx.test(t.name));}catch(e){diag.textContent='Regex error: '+e.message;return trainers;}}
-  try{render(trainers);searchEl.oninput=()=>render(filter(searchEl.value));}catch(e){diag.textContent='Init error: '+e.message;}
+  function render(list){
+    listEl.innerHTML='';
+    list.forEach(it=>{
+      const el=document.createElement('div');
+      el.className='trainer';
+      el.innerHTML=`<div style="display:flex;align-items:center;gap:8px"><span class="dot"></span><div style="font-weight:700">${it.name}</div></div><div style="opacity:.6">›</div>`;
+      el.onclick=()=>select(it);
+      listEl.appendChild(el);
+    });
+  }
+  function select(it){
+    viewerTitle.textContent='📄 '+it.name;
+    pdfObj.data=it.url;
+    openNew.href=it.url;
+    if(/iPad|iPhone|iPod/.test(navigator.userAgent)){
+      hint.style.display='block';
+      window.open(it.url,'_blank');
+    } else hint.style.display='none';
+  }
+  function filter(q){
+    q=(q||'').trim();
+    if(!q) return trainers;
+    try{
+      const rx=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
+      return trainers.filter(t=>rx.test(t.name));
+    }catch(_){return trainers;}
+  }
+  render(trainers);
+  searchEl.oninput=()=>render(filter(searchEl.value));
 })();
 </script>
 </body>
