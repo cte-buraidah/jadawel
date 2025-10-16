@@ -6,8 +6,8 @@
 <title>جداول مدربي قسم الدراسات العامة</title>
 <style>
 :root {
-  --brand:#007a3d;        
-  --brand-700:#005a2b;    
+  --brand:#3a506b;        
+  --brand-700:#1c2541;    
   --bg:#d7ecf8;           
   --panel:#ffffff;
   --text:#ffffff;          
@@ -29,7 +29,13 @@ input[type=search]{width:100%;max-width:380px;background:rgba(255,255,255,.3);bo
 .panel{background:rgba(255,255,255,.1);border:1px solid var(--border);border-radius:16px;padding:12px;min-height:200px}
 .panel h2{margin:0 0 10px 0;font-size:18px;color:#ffffff}
 .list{display:flex;flex-direction:column;gap:8px;max-height:65vh;overflow:auto;padding-right:4px}
-.trainer{background:linear-gradient(180deg,#007a3d,#005a2b);border:1px solid #007a3d;padding:10px 12px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;transition:.15s;color:#ffffff}
+.trainer{
+  background:linear-gradient(180deg,var(--brand),var(--brand-700));
+  border:1px solid var(--brand-700);
+  padding:10px 12px;border-radius:12px;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  transition:.15s;color:#ffffff;
+}
 .trainer:hover{transform:translateY(-1px);border-color:#ffffff;box-shadow:0 0 0 2px rgba(255,255,255,.3)}
 .dot{width:8px;height:8px;border-radius:50%;background:#ffffff;margin-left:8px}
 .viewer{height:70vh;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#eaf6ff;display:flex;flex-direction:column}
