@@ -2,167 +2,47 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>جداول مدربي قسم الدراسات العامة</title>
 <style>
 :root {
-  :root {
-  --brand: #007a3d;        /* أخضر الكلية */
-  --brand-700: #005a2b;    /* أخضر أغمق */
-  --bg: #f3f7f4;           /* خلفية رمادية فاتحة مائلة للأخضر */
-  --panel: #ffffff;        /* ناعم أبيض */
-  --text: #1a1a1a;         /* رمادي غامق للكتابة */
-  --muted: #4b6043;        /* رمادي زيتوني للنصوص الثانوية */
-  --chip: #e3efe7;         /* شريط البحث والأزرار الفاتحة */
-  --border: #cdddcf;       /* حدود ناعمة */
-}
+  --brand:#007a3d;        
+  --brand-700:#005a2b;    
+  --bg:#d7ecf8;           
+  --panel:#ffffff;
+  --text:#ffffff;          
+  --muted:#4b6043;
+  --chip:#e3efe7;
+  --border:#cdddcf;
 }
 *{box-sizing:border-box}
-body {
-  margin:0;
-  background:linear-gradient(180deg,var(--bg),#09121d);
-  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans";
-  color:var(--text);
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-}
-.container {
-  width:min(1100px,100%);
-  background:rgba(15,23,42,.75);
-  backdrop-filter:blur(8px);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-}
-header {
-  display:flex;
-  gap:12px;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  border-bottom:1px solid var(--border);
-  padding-bottom:12px;
-  margin-bottom:14px;
-}
-.brand {
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-.brand img {
-  width:80px;
-  height:auto;
-  border-radius:12px;
-  box-shadow:0 0 6px rgba(0,0,0,.3);
-}
-.brand h1 {
-  margin:0;
-  font-size:clamp(20px,3.5vw,26px);
-  color:#e2f3ff;
-}
-.subtext {
-  color:#a7f3d0;
-  padding:6px 10px;
-  font-size:15px;
-  font-weight:600;
-}
-input[type=search] {
-  width:100%;
-  max-width:380px;
-  background:var(--chip);
-  border:1px solid var(--border);
-  color:var(--text);
-  padding:10px 12px;
-  border-radius:12px;
-  outline:none;
-}
-.layout {
-  display:grid;
-  grid-template-columns:360px 1fr;
-  gap:14px;
-}
+body{margin:0;background:linear-gradient(180deg,var(--bg),#c0e0f2);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans";color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.container{width:min(1100px,100%);background:rgba(15,23,42,.6);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+header{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:15px}
+.brand img{width:80px;height:auto;border-radius:12px;box-shadow:0 0 6px rgba(0,0,0,.3)}
+.brand h1{margin:0;font-size:clamp(20px,3.5vw,26px);color:#ffffff}
+.subtext{color:#d9ffd9;padding:6px 10px;font-size:15px;font-weight:600}
+input[type=search]{width:100%;max-width:380px;background:rgba(255,255,255,.3);border:1px solid var(--border);color:#ffffff;padding:10px 12px;border-radius:12px;outline:none}
+.layout{display:grid;grid-template-columns:360px 1fr;gap:14px}
 @media (max-width:980px){.layout{grid-template-columns:1fr}}
-.panel {
-  background:rgba(2,6,23,.35);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:12px;
-  min-height:200px;
-}
-.panel h2 {
-  margin:0 0 10px 0;
-  font-size:18px;
-  color:#e2f3ff;
-}
-.list {
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  max-height:65vh;
-  overflow:auto;
-  padding-right:4px;
-}
-.trainer {
-  background:linear-gradient(180deg,#0b1723,#0f2433);
-  border:1px solid var(--border);
-  padding:10px 12px;
-  border-radius:12px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  transition:.15s;
-}
-.trainer:hover {
-  transform:translateY(-1px);
-  border-color:#1e293b;
-  box-shadow:0 0 0 2px rgba(10,77,104,.2);
-}
-.dot {
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:var(--brand);
-  margin-left:8px;
-}
-.viewer {
-  height:70vh;
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  background:#0b1222;
-  display:flex;
-  flex-direction:column;
-}
-.btn {
-  background:var(--brand);
-  border:1px solid var(--brand-700);
-  color:#eaffff;
-  padding:10px 12px;
-  border-radius:12px;
-  cursor:pointer;
-  font-weight:700;
-  text-decoration:none;
-  display:inline-block;
-  margin:8px 0;
-}
-.msg {
-  color:#fbbf24;
-  margin-top:6px;
-  font-size:13px;
-}
+.panel{background:rgba(255,255,255,.1);border:1px solid var(--border);border-radius:16px;padding:12px;min-height:200px}
+.panel h2{margin:0 0 10px 0;font-size:18px;color:#ffffff}
+.list{display:flex;flex-direction:column;gap:8px;max-height:65vh;overflow:auto;padding-right:4px}
+.trainer{background:linear-gradient(180deg,#007a3d,#005a2b);border:1px solid #007a3d;padding:10px 12px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;transition:.15s;color:#ffffff}
+.trainer:hover{transform:translateY(-1px);border-color:#ffffff;box-shadow:0 0 0 2px rgba(255,255,255,.3)}
+.dot{width:8px;height:8px;border-radius:50%;background:#ffffff;margin-left:8px}
+.viewer{height:70vh;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#eaf6ff;display:flex;flex-direction:column}
+.btn{background:var(--brand);border:1px solid var(--brand-700);color:#ffffff;padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:700;text-decoration:none;display:inline-block;margin:8px 0}
+.msg{color:#ffd700;margin-top:6px;font-size:13px}
 </style>
 </head>
 <body>
 <div class="container">
   <header>
     <div class="brand">
-<img src="photo_٢٠٢٥-١٠-١٣_١٨-٣٢-١٤.jpg" alt="شعار الكلية" style="width:80px;height:auto;border-radius:12px;box-shadow:0 0 6px rgba(0,0,0,.3)">      <div>
+      <img src="photo_٢٠٢٥-١٠-١٣_١٨-٣٢-١٤.jpg" alt="شعار الكلية" onerror="this.style.display='none'">
+      <div>
         <h1>جداول مدربي قسم الدراسات العامة</h1>
         <div class="subtext">الكلية التقنية لعلوم البيئة ببريدة</div>
       </div>
@@ -189,69 +69,98 @@ input[type=search] {
 
 <script>
 (function(){
-  const listEl=document.getElementById('list');
-  const searchEl=document.getElementById('search');
-  const pdfObj=document.getElementById('pdfObj');
-  const openNew=document.getElementById('openNew');
-  const viewerTitle=document.getElementById('viewerTitle');
-  const hint=document.getElementById('hint');
+  const listEl = document.getElementById('list');
+  const searchEl = document.getElementById('search');
+  const pdfObj = document.getElementById('pdfObj');
+  const openNew = document.getElementById('openNew');
+  const viewerTitle = document.getElementById('viewerTitle');
+  const hint = document.getElementById('hint');
 
-  // أسماء المدرّبين (تأكد من روابط ملفاتهم)
-  const trainers=[
-    { name:"يوسف صالح محمد العليان", url:"page-01.pdf" },
-    { name:"عبدالسلام عبدالله محمد العليان", url:"page-02.pdf" },
-    { name:"علي صالح عبدالله العودة", url:"page-03.pdf" },
-    { name:"فهد عبدالله محمد المطوع", url:"page-04.pdf" },
-    { name:"علي عبدالله صالح اليحيى", url:"page-05.pdf" },
-    { name:"ضيف الله داخل هملان المطيري", url:"page-06.pdf" },
-    { name:"تركي ضبعان عبيد الحربي", url:"page-07.pdf" },
-    { name:"منصور محمد صالح القريعان", url:"page-08.pdf" },
-    { name:"منصور عبدالرحمن مرزوق الغيداني الحربي", url:"page-09.pdf" },
-    { name:"فهد محمد ابراهيم الراشد الحميد", url:"page-10.pdf" },
-    { name:"منصور مغيران مساعد الحربي", url:"page-11.pdf" },
-    { name:"نايف ابراهيم محمد المعارك", url:"page-12.pdf" },
-    { name:"طارق عبيد براهيم الفريدي الحربي", url:"page-13.pdf" },
-    { name:"عبدالله محمد عبدالله القباع", url:"page-14.pdf" },
-    { name:"ثامر جزاء طلحب العوفي الحربي", url:"page-15.pdf" },
-    { name:"بدر شامخ فلاح المهيمزي الرشيدي", url:"page-16.pdf" },
-    { name:"عبدالرحمن صالح محمد العمير", url:"page-17.pdf" },
-    { name:"معاذ فهد عبدالله السلمي", url:"page-18.pdf" },
-    { name:"ناصر عبدالرحمن ابراهيم الصعنوني", url:"page-19.pdf" },
-    { name:"سلطان فهد ماطر العتيبي", url:"page-20.pdf" },
-    { name:"عبدالكريم محمد عبدالعزيز السيف", url:"page-21.pdf" },
-    { name:"سلطان عبدالعزيز عبدالله الزويد", url:"page-22.pdf" },
-    { name:"عبدالرحيم منصور عبدالعزيز الهقاص البقمي", url:"page-23.pdf" }
+  const trainers = [
+    { n: 1,  name: "يوسف صالح محمد العليان" },
+    { n: 2,  name: "عبدالسلام عبدالله محمد العليان" },
+    { n: 3,  name: "علي صالح عبدالله العودة" },
+    { n: 4,  name: "فهد عبدالله محمد المطوع" },
+    { n: 5,  name: "علي عبدالله صالح اليحيى" },
+    { n: 6,  name: "ضيف الله داخل هملان المطيري" },
+    { n: 7,  name: "تركي ضبعان عبيد الحربي" },
+    { n: 8,  name: "منصور محمد صالح القريعان" },
+    { n: 9,  name: "منصور عبدالرحمن مرزوق الغيداني الحربي" },
+    { n:10,  name: "فهد محمد ابراهيم الراشد الحميد" },
+    { n:11,  name: "منصور مغيران مساعد الحربي" },
+    { n:12,  name: "نايف ابراهيم محمد المعارك" },
+    { n:13,  name: "طارق عبيد براهيم الفريدي الحربي" },
+    { n:14,  name: "عبدالله محمد عبدالله القباع" },
+    { n:15,  name: "ثامر جزاء طلحب العوفي الحربي" },
+    { n:16,  name: "بدر شامخ فلاح المهيمزي الرشيدي" },
+    { n:17,  name: "عبدالرحمن صالح محمد العمير" },
+    { n:18,  name: "معاذ فهد عبدالله السلمي" },
+    { n:19,  name: "ناصر عبدالرحمن ابراهيم الصعنوني" },
+    { n:20,  name: "سلطان فهد ماطر العتيبي" },
+    { n:21,  name: "سلطان فهد ماطر العتيبي" },
+    { n:22,  name: "عبدالكريم محمد عبدالعزيز السيف" },
+    { n:23,  name: "سلطان عبدالعزيز عبدالله الزويد" },
+    { n:24,  name: "عبدالرحيم منصور عبدالعزيز الهقاص البقمي" },
+    { n:25,  name: "حاتم صالح محمد القاسم" }
   ];
+
+  function isIOS(){ return /iPad|iPhone|iPod/.test(navigator.userAgent); }
+
+  async function resolvePdfUrl(num){
+    const pad2 = String(num).padStart(2,'0');
+    const candidates = [
+      `page-${pad2}.pdf`,
+      `page-${num}.pdf`,
+      `page-${pad2}.PDF`,
+      `page-${num}.PDF`
+    ];
+    for(const url of candidates){
+      try{
+        const res = await fetch(url, { method:'HEAD', cache:'no-store' });
+        if(res.ok) return url;
+      }catch(_){}
+    }
+    return candidates[0];
+  }
 
   function render(list){
     listEl.innerHTML='';
     list.forEach(it=>{
       const el=document.createElement('div');
       el.className='trainer';
-      el.innerHTML=`<div style="display:flex;align-items:center;gap:8px"><span class="dot"></span><div style="font-weight:700">${it.name}</div></div><div style="opacity:.6">›</div>`;
+      el.innerHTML=`<div style="display:flex;align-items:center;gap:8px">
+        <span class="dot"></span><div style="font-weight:700">${it.name}</div>
+      </div><div style="opacity:.6">›</div>`;
       el.onclick=()=>select(it);
       listEl.appendChild(el);
     });
   }
-  function select(it){
+
+  async function select(it){
     viewerTitle.textContent='📄 '+it.name;
-    pdfObj.data=it.url;
-    openNew.href=it.url;
-    if(/iPad|iPhone|iPod/.test(navigator.userAgent)){
-      hint.style.display='block';
-      window.open(it.url,'_blank');
-    } else hint.style.display='none';
+    const url=await resolvePdfUrl(it.n);
+    pdfObj.data=url;
+    openNew.href=url;
+    hint.style.display=isIOS()?'block':'none';
   }
+
   function filter(q){
     q=(q||'').trim();
     if(!q) return trainers;
     try{
       const rx=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
-      return trainers.filter(t=>rx.test(t.name));
-    }catch(_){return trainers;}
+      return trainers.filter(t=> rx.test(t.name));
+    }catch(_){ return trainers; }
   }
-  render(trainers);
-  searchEl.oninput=()=>render(filter(searchEl.value));
+
+  try{
+    render(trainers);
+    searchEl.oninput=()=>render(filter(searchEl.value));
+  }catch(e){
+    console.error('Init error:', e);
+    document.getElementById('list').innerHTML =
+      '<div class="msg">حدث خطأ بسيط في عرض القائمة. حدّث الصفحة أو راجع آخر تعديل.</div>';
+  }
 })();
 </script>
 </body>
