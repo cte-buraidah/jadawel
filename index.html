@@ -26,7 +26,7 @@ body{
   padding:24px;
 }
 .container{
-  width:min(1100px,100%);
+  width:min(900px,100%);
   background:rgba(15,23,42,.65);
   border-radius:20px;
   padding:20px;
@@ -59,8 +59,6 @@ input[type=search]{
   padding:10px 12px;
   border-radius:12px;
 }
-.layout{display:grid;grid-template-columns:360px 1fr;gap:14px}
-@media (max-width:980px){.layout{grid-template-columns:1fr}}
 
 .panel{
   background:rgba(255,255,255,.1);
@@ -69,39 +67,37 @@ input[type=search]{
 }
 .panel h2{margin:0 0 10px;color:#fff}
 
-.list{display:flex;flex-direction:column;gap:8px;max-height:65vh;overflow:auto}
+.list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-height:70vh;
+  overflow:auto;
+}
 
 .trainer{
   background:linear-gradient(180deg,var(--brand),var(--brand-700));
-  padding:10px 12px;
+  padding:12px 14px;
   border-radius:12px;
   cursor:pointer;
   display:flex;
   justify-content:space-between;
   align-items:center;
   color:#fff;
+  font-weight:600;
 }
-.trainer:hover{box-shadow:0 0 0 2px rgba(255,255,255,.3)}
+.trainer:hover{
+  box-shadow:0 0 0 2px rgba(255,255,255,.3);
+  transform:translateY(-1px);
+}
 
-.dot{width:8px;height:8px;border-radius:50%;background:#fff;margin-left:8px}
-
-.viewer{
-  height:70vh;
-  border-radius:12px;
-  overflow:hidden;
-  background:#eaf6ff;
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#fff;
+  margin-left:8px;
 }
-.btn{
-  display:inline-block;
-  margin:8px 0;
-  background:var(--brand);
-  color:#fff;
-  padding:10px 14px;
-  border-radius:12px;
-  text-decoration:none;
-  font-weight:700;
-}
-.msg{color:#ffd700;font-size:13px}
 </style>
 </head>
 
@@ -110,7 +106,8 @@ input[type=search]{
 
 <header>
   <div class="brand">
-    <img src="photo_٢٠٢٥-١٠-١٣_١٨-٣٢-١٤.jpg" alt="شعار الكلية" onerror="this.style.display='none'">
+    <img src="photo_٢٠٢٥-١٠-١٣_١٨-٣٢-١٤.jpg" alt="شعار الكلية"
+         onerror="this.style.display='none'">
     <div>
       <h1>جداول مدربي قسم الدراسات العامة</h1>
       <div class="subtext">الكلية التقنية لعلوم البيئة ببريدة</div>
@@ -119,25 +116,11 @@ input[type=search]{
   <input id="search" type="search" placeholder="ابحث باسم المدرّب…">
 </header>
 
-<div class="layout">
-
 <section class="panel">
   <h2>قائمة المدرّبين</h2>
   <div id="list" class="list"></div>
 </section>
 
-<section class="panel">
-  <h2 id="viewerTitle">اختر اسم المدرّب</h2>
-  <a id="openNew" class="btn" target="_blank">فتح الملف مباشرة ↗</a>
-  <div class="viewer">
-    <object id="pdfObj" type="application/pdf" style="width:100%;height:100%"></object>
-  </div>
-  <div id="hint" class="msg" style="display:none">
-    إذا لم يظهر الملف، اضغط "فتح الملف مباشرة".
-  </div>
-</section>
-
-</div>
 </div>
 
 <script>
@@ -167,37 +150,26 @@ const trainers = [
   [23,"حاتم صالح محمد القاسم"]
 ];
 
-const listEl=document.getElementById('list');
-const searchEl=document.getElementById('search');
-const pdfObj=document.getElementById('pdfObj');
-const openNew=document.getElementById('openNew');
-const viewerTitle=document.getElementById('viewerTitle');
-const hint=document.getElementById('hint');
-
-function isIOS(){return /iPad|iPhone|iPod/.test(navigator.userAgent)}
+const listEl = document.getElementById('list');
+const searchEl = document.getElementById('search');
 
 function render(list){
   listEl.innerHTML='';
   list.forEach(([n,name])=>{
     const el=document.createElement('div');
     el.className='trainer';
-    el.innerHTML=`<div><span class="dot"></span> ${name}</div><div>›</div>`;
-    el.onclick=()=>select(n,name);
+    el.innerHTML=`<div><span class="dot"></span> ${name}</div><div>PDF ↗</div>`;
+    el.onclick=()=>{
+      const url = `page-${String(n).padStart(2,'0')}.pdf`;
+      window.open(url,'_blank');
+    };
     listEl.appendChild(el);
   });
 }
 
-function select(n,name){
-  viewerTitle.textContent='📄 '+name;
-  const url=`page-${String(n).padStart(2,'0')}.pdf`;
-  pdfObj.data=url;
-  openNew.href=url;
-  hint.style.display=isIOS()?'block':'none';
-}
-
 searchEl.oninput=()=>{
   const q=searchEl.value.trim();
-  render(!q?trainers:trainers.filter(t=>t[1].includes(q)));
+  render(!q ? trainers : trainers.filter(t=>t[1].includes(q)));
 };
 
 render(trainers);
